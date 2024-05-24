@@ -71,7 +71,7 @@ self.search_entry.bind("<KeyRelease>", lambda event: self.search_revers())
 self.uredjaj_frame = tk.Frame(self.root)
         self.uredjaj_frame.grid(row=5, column=0, columnspan=2)
 
-        self.add_device_row()
+self.add_device_row()
 
         tk.Button(self.root, text="Dodaj uređaj", command=self.add_device_row).grid(row=6, column=0, columnspan=2)
 
