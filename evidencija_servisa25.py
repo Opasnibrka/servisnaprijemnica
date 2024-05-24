@@ -69,7 +69,7 @@ self.search_entry = tk.Entry(self.root, textvariable=self.search_var)
 self.search_entry.grid(row=11, column=1, padx=10, pady=5)
 self.search_entry.bind("<KeyRelease>", lambda event: self.search_revers())
 self.uredjaj_frame = tk.Frame(self.root)
-        self.uredjaj_frame.grid(row=5, column=0, columnspan=2)
+self.uredjaj_frame.grid(row=5, column=0, columnspan=2)
 
 self.add_device_row()
 
