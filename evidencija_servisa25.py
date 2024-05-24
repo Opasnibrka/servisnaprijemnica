@@ -36,6 +36,39 @@ class EvidencijaApp:
         tk.Label(self.root, text="Uređaji:").grid(row=4, column=0, columnspan=2)
 
         self.uredjaj_frame = tk.Frame(self.root)
+self.uredjaj_frame.grid(row=5, column=0, columnspan=2, padx=10, pady=5)
+
+# Dodavanje naslova za kolone
+headers = ["Tip uređaja", "Serijski broj", "Osnovni podaci", "Broj primljenih novčanica", "Ugrađeni delovi", "Opis", "Obračun", "Serviser"]
+for col, header in enumerate(headers):
+    tk.Label(self.uredjaj_frame, text=header, bg="lightgreen").grid(row=0, column=col, padx=5, pady=5)
+
+self.device_rows = []
+self.add_device_row()
+
+tk.Button(self.root, text="Dodaj još jedan uređaj", command=self.add_device_row).grid(row=6, column=0, columnspan=2, pady=10)
+tk.Button(self.root, text="Sačuvaj", command=self.save_data).grid(row=7, column=0, columnspan=2, pady=10)
+tk.Button(self.root, text="Štampaj", command=self.print_revers).grid(row=8, column=0, columnspan=2, pady=10)
+tk.Button(self.root, text="Novi revers", command=self.new_revers).grid(row=9, column=0, columnspan=2, pady=10)
+
+# Tabela sa postojećim reversima
+self.revers_tree = ttk.Treeview(self.root, columns=("broj_reversa", "datum", "ime_firme", "licno_ime", "adresa", "kontakt_telefon"), show='headings')
+self.revers_tree.heading("broj_reversa", text="Broj reversa")
+self.revers_tree.heading("datum", text="Datum")
+self.revers_tree.heading("ime_firme", text="Ime firme")
+self.revers_tree.heading("licno_ime", text="Lično ime")
+self.revers_tree.heading("adresa", text="Adresa")
+self.revers_tree.heading("kontakt_telefon", text="Kontakt telefon")
+self.revers_tree.grid(row=10, column=0, columnspan=2, padx=10, pady=10)
+self.revers_tree.bind("<Double-1>", self.load_selected_revers)
+
+# Polje za pretragu
+self.search_var = tk.StringVar()
+tk.Label(self.root, text="Pretraga:").grid(row=11, column=0, padx=10, pady=5)
+self.search_entry = tk.Entry(self.root, textvariable=self.search_var)
+self.search_entry.grid(row=11, column=1, padx=10, pady=5)
+self.search_entry.bind("<KeyRelease>", lambda event: self.search_revers())
+self.uredjaj_frame = tk.Frame(self.root)
         self.uredjaj_frame.grid(row=5, column=0, columnspan=2)
 
         self.add_device_row()
